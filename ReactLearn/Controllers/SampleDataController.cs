@@ -31,6 +31,7 @@ namespace ReactLearn.Controllers
             public string DateFormatted { get; set; }
             public int TemperatureC { get; set; }
             public string Summary { get; set; }
+            // get temp{
 
             public int TemperatureF
             {
