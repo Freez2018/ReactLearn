@@ -10,6 +10,8 @@ namespace Data.Entities
         public string Name { get; set; }
 
         public string Description { get; set; }
+        public DateTime? DateDisabled { get; set; }
+        public DateTime? DateUpdated { get; set; }
 
         public double MeasurableValue { get; set; }
         [ForeignKey(nameof(CategoryId))]

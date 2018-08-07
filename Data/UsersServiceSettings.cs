@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Data
 {
-     public  class UsersServiceSettings
+     public  class ProductsServiceSettings
     {
         public string DatabaseConnectionString { get; set; }
     }

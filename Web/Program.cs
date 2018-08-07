@@ -7,6 +7,9 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
+using Data.Context;
+using Data;
 
 namespace ReactLearn
 {
@@ -14,12 +17,19 @@ namespace ReactLearn
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            var host = BuildWebHost(args);
+            using (var serviceScope = host.Services.CreateScope())
+            {
+                var accountsRepository = serviceScope.ServiceProvider.GetService<UsersManagementContext>();
+                ProductsDataSeeder.SeedProducts(accountsRepository);
+              
+            }
+            host.Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
+        public static IWebHost BuildWebHost(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args).UseStartup<Startup>().Build();
+        }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Data;
 using Data.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,7 +25,15 @@ namespace ReactLearn
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();         
+            var databaseConnectionString = Configuration["ConnectionStrings:DefaultConnection"];
+
+            services.AddProductsService(new ProductsServiceSettings
+            {
+                DatabaseConnectionString = databaseConnectionString
+            });
+
+            services.AddMvc();
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

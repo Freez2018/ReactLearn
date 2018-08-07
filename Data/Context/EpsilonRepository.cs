@@ -9,13 +9,16 @@ namespace Data.Context
 {
     public class UsersManagementContext : DbContext
     {
-        public UsersManagementContext () 
-        {
+        //public UsersManagementContext () 
+        //{
 
+        //}
+        public UsersManagementContext(DbContextOptions<UsersManagementContext> options) : base(options)
+        {
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=IS-WKS107;Database=Epsilon;Trusted_Connection=True;");
+          //  optionsBuilder.UseSqlServer(@"Server=IS-WKS107;Database=Epsilon;Trusted_Connection=True;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

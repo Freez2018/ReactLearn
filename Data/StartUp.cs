@@ -9,7 +9,7 @@ namespace Data
 {
     public static class Startup
     {
-        public static void AddAccountsService(this IServiceCollection services, UsersServiceSettings settings)
+        public static void AddProductsService(this IServiceCollection services, ProductsServiceSettings settings)
         {
             if (settings == null)
             {
@@ -20,8 +20,8 @@ namespace Data
                 throw new Exception("Database connection string for AccountsService is empty.");
             }
 
-          //  services.AddDbContext<UsersManagementContext>(options => options.UseSqlServer(settings.DatabaseConnectionString));
-            services.AddDbContext<UsersManagementContext>(options => options.UseSqlServer(@"Server=IS-WKS107;Database=Epsilon;Trusted_Connection=True;"));//temp
+            services.AddDbContext<UsersManagementContext>(options => options.UseSqlServer(settings.DatabaseConnectionString));
+             //   services.AddDbContext<UsersManagementContext>(options => options.UseSqlServer(@"Server=IS-WKS107;Database=Epsilon;Trusted_Connection=True;"));//temp
             // services.AddTransient<IAccountsService, AccountsService>();
         }
     }
