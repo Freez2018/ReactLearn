@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Client.Service.Products.Managers;
 using Data;
 using Data.Context;
 using Microsoft.AspNetCore.Builder;
@@ -31,7 +32,7 @@ namespace ReactLearn
             {
                 DatabaseConnectionString = databaseConnectionString
             });
-
+            services.AddScoped<IProductsManager, ProductsManager>();
             services.AddMvc();
            
         }
