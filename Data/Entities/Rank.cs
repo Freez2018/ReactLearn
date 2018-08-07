@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Data.Entities;
+using System;
 
-namespace Data
+namespace Data.Entities
 {
-    public class Rank
+    public class Rank : BaseEntity
 
-    {
-        public Guid Id { get; set; }
+    {      
         public string DisplayName { get; set; }
         public int Points { get; set; }
 
