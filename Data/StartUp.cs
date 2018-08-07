@@ -21,7 +21,7 @@ namespace Data
             }
 
           //  services.AddDbContext<UsersManagementContext>(options => options.UseSqlServer(settings.DatabaseConnectionString));
-            services.AddDbContext<UsersManagementContext>(options => options.UseSqlServer(@"Server=IS-WKS107;Database=Epsilon;Trusted_Connection=True;");//temp
+            services.AddDbContext<UsersManagementContext>(options => options.UseSqlServer(@"Server=IS-WKS107;Database=Epsilon;Trusted_Connection=True;"));//temp
             // services.AddTransient<IAccountsService, AccountsService>();
         }
     }

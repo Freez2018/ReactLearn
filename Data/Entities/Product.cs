@@ -16,7 +16,7 @@ namespace Data.Entities
         public virtual ProductCategory ProductCategory { get; set; }
 
         public string CategoryId { get; set; }
-        
+        public string UserAddedId { get; set; }
 
     }
 }

@@ -15,7 +15,7 @@ namespace Data.Context
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-           // optionsBuilder.UseSqlServer(@"Server=IS-WKS107;Database=Epsilon;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=IS-WKS107;Database=Epsilon;Trusted_Connection=True;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,7 @@ namespace Data.Context
         public DbSet<Rank> Rank { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<ProductCategory> ProductCategory { get; set; }
-      
+        public DbSet<ProductsMatching> ProductsMatching { get; set; }
+
     }
 }
