@@ -6,11 +6,13 @@ using AutoMapper.QueryableExtensions;
 using Client.Service;
 using Client.Service.Products.Managers;
 using Client.Service.Products.Models;
+using Data.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers
 {
+    [Route("api/[controller]")]
     public class ProductController : Controller
     {
         private readonly IProductsManager _ProductsManager;
@@ -22,7 +24,7 @@ namespace Web.Controllers
         // GET: Product
         public ActionResult Index(string sort)
         {
-            var actives = _ProductsManager.ListActiveProducts(sort).ProjectTo<ProductModel>(Mappings.Mapper.ConfigurationProvider).ToList();
+            var actives = _ProductsManager.ListActiveProducts(sort).ToList();
             return View();
         }
 
@@ -32,10 +34,10 @@ namespace Web.Controllers
             return View();
         }
 
-        // GET: Product/Create
-        public ActionResult Create()
-        {
-            return View();
+        [HttpGet("[action]")]
+        public IEnumerable<Product> ProductsList()
+        {           
+            return _ProductsManager.ListActiveProducts("Name");
         }
 
         // POST: Product/Create

@@ -22,7 +22,9 @@ namespace ReactLearn.Controllers
         }
         public IActionResult Index()
         {
-            var actives = _ProductsManager.ListActiveProducts("name").ProjectTo<ProductModel>(Mappings.Mapper.ConfigurationProvider).ToList();
+         // var actives = _ProductsManager.ListActiveProducts("name").ProjectTo<ProductModel>(Mappings.Mapper.ConfigurationProvider).ToList();
+            var actives1 = _ProductsManager.ListActiveProducts("name").ToList();
+
             return View();
         }
 
