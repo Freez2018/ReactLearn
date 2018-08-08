@@ -3,26 +3,26 @@ import { RouteComponentProps } from 'react-router';
 import 'isomorphic-fetch';
 
 interface ProductsExampleState {
-    forecasts: Product[];
+    products: Product[];
     loading: boolean;
 }
 
 export class Products extends React.Component<RouteComponentProps<{}>, ProductsExampleState> {
     constructor() {
         super();
-        this.state = { forecasts: [], loading: true };
+        this.state = { products: [], loading: true };
 
         fetch('api/Product/ProductsList')
             .then(response => response.json() as Promise<Product[]>)
             .then(data => {
-                this.setState({ forecasts: data, loading: false });
+                this.setState({ products: data, loading: false });
             });
     }
 
     public render() {
         let contents = this.state.loading
             ? <p><em>Loading...</em></p>
-            : Products.renderForecastsTable(this.state.forecasts);
+            : Products.renderForecastsTable(this.state.products);
 
         return <div>
             <h1>Products list</h1>
@@ -36,18 +36,18 @@ export class Products extends React.Component<RouteComponentProps<{}>, ProductsE
             <thead>
                 <tr>
                     <th>Date created</th>
-                    <th>Name</th> 
-                    <th>Description</th>
-                    <th>Measurable Value</th>                                    
+                    <th>Name</th>                   
+                    <th>Measurable Value</th> 
+                    <th>Get substitutes</th>    
                 </tr>
             </thead>
             <tbody>
-                    {products.map(forecast =>
-                        <tr key={forecast.dateCreated}>
-                        <td>{new Date(forecast.dateCreated).toLocaleDateString() }</td>
-                        <td>{forecast.name }</td>   
-                        <td>{forecast.description }</td>
-                        <td>{forecast.measurableValue }</td>
+                    {products.map(prod =>
+                    <tr key={prod.dateCreated}>
+                        <td>{new Date(prod.dateCreated).toLocaleDateString() }</td>
+                        <td>{prod.name }</td>                      
+                        <td>{prod.measurableValue}</td>
+                        <td><a href='#'>Get substitutes</a></td>
                                       
                 </tr>
             )}
