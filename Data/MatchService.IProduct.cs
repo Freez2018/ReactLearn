@@ -15,6 +15,7 @@ namespace Data
     {
         Product GetProduct(string id);
         IQueryable<Product> ListActiveProducts();
+        IQueryable<ProductsMatching> GetSubstitutes(string id);
     }
 
     public partial class MatchService
@@ -22,6 +23,9 @@ namespace Data
       
         private ProductDac _productDac;
         internal ProductDac ProductDac => _productDac ?? (_productDac = new ProductDac(_productsRepository));
+
+        private ProductsMatchingDac _productsMatchingDac;
+        internal ProductsMatchingDac ProductsMatchingDac => _productsMatchingDac ?? (_productsMatchingDac = new ProductsMatchingDac(_productsRepository));
 
         public Product GetProduct(string id)
         {
@@ -31,6 +35,10 @@ namespace Data
         public IQueryable<Product> ListActiveProducts()
         {
             return ProductDac.ListActive();
+        }
+        public IQueryable<ProductsMatching> GetSubstitutes(string id)
+        {
+            return ProductsMatchingDac.ListEntries(id);
         }
 
     }

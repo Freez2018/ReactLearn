@@ -39,7 +39,12 @@ namespace Web.Controllers
         {           
             return _ProductsManager.ListActiveProducts("Name");
         }
-
+        [HttpGet("[action]")]
+        public IEnumerable<ProductsMatching> GetSubstitutes(string id)
+        {
+            // TODO change to get substitute products
+            return _ProductsManager.GetSubstitutes(id);
+        }
         // POST: Product/Create
         [HttpPost]
         [ValidateAntiForgeryToken]

@@ -11,10 +11,21 @@ namespace Client.Service.Products.Managers
         Product GetProduct(string productId);
 
         IQueryable<Product> ListActiveProducts(string sortColumn = "name");
+
+        IQueryable<ProductsMatching> GetSubstitutes(string productId);
     }
 
     public partial class ProductsManager
     {
+        public IQueryable<ProductsMatching> GetSubstitutes(string productId)
+        {
+            if (productId == null)
+            {
+                throw new ArgumentNullException(nameof(productId));
+            }
+
+            return MatchService.GetSubstitutes(productId);
+        }
 
         public Product GetProduct(string productId)
         {

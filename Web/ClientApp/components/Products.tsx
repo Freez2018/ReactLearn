@@ -47,12 +47,13 @@ export class Products extends React.Component<RouteComponentProps<{}>, ProductsE
                         <td>{new Date(prod.dateCreated).toLocaleDateString() }</td>
                         <td>{prod.name }</td>                      
                         <td>{prod.measurableValue}</td>
-                        <td><a href='#'>Get substitutes</a></td>
+                        <td><a href={'api/Product/GetSubstitutes?id=' +prod.id}>Get substitutes</a></td>
                                       
-                </tr>
+                   </tr>
             )}
             </tbody>
         </table>;
+
     }
 }
 
@@ -61,4 +62,5 @@ interface Product {
     description: number;
     measurableValue: number;
     name: string;
+    id: string;
 }

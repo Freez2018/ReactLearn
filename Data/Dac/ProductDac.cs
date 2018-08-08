@@ -22,5 +22,10 @@ namespace Data.Dac
         {
             return List(p => p.DateDisabled != null);
         }
+
+        //public IQueryable<Product> GetSubstitutes()
+        //{
+        ////    return List(p => p.DateDisabled == null);
+        //}
     }
 }
