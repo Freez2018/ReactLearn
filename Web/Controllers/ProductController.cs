@@ -40,9 +40,9 @@ namespace Web.Controllers
             return _ProductsManager.ListActiveProducts("Name");
         }
         [HttpGet("[action]")]
-        public IEnumerable<ProductsMatching> GetSubstitutes(string id)
+        public IEnumerable<RatedProduct> GetSubstitutes(string id)
         {
-            // TODO change to get substitute products
+            // TODO change to add mapping
             return _ProductsManager.GetSubstitutes(id);
         }
         // POST: Product/Create

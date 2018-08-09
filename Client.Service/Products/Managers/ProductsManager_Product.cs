@@ -12,18 +12,18 @@ namespace Client.Service.Products.Managers
 
         IQueryable<Product> ListActiveProducts(string sortColumn = "name");
 
-        IQueryable<ProductsMatching> GetSubstitutes(string productId);
+        IQueryable<RatedProduct> GetSubstitutes(string productId);
     }
 
     public partial class ProductsManager
     {
-        public IQueryable<ProductsMatching> GetSubstitutes(string productId)
+        public IQueryable<RatedProduct> GetSubstitutes(string productId)
         {
             if (productId == null)
             {
                 throw new ArgumentNullException(nameof(productId));
             }
-
+         
             return MatchService.GetSubstitutes(productId);
         }
 

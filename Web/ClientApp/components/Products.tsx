@@ -55,6 +55,9 @@ export class Products extends React.Component<RouteComponentProps<{}>, ProductsE
         </table>;
 
     }
+    private static renderSubstitutessTable() {
+        alert('test');
+    }
 }
 
 interface Product {
