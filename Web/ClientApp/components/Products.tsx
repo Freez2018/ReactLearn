@@ -5,12 +5,13 @@ import 'isomorphic-fetch';
 interface ProductsExampleState {
     products: Product[];
     loading: boolean;
+    substitutes: boolean;
 }
 
 export class Products extends React.Component<RouteComponentProps<{}>, ProductsExampleState> {
     constructor() {
         super();
-        this.state = { products: [], loading: true };
+        this.state = { products: [], loading: true, substitutes: false};
 
         fetch('api/Product/ProductsList')
             .then(response => response.json() as Promise<Product[]>)
@@ -47,17 +48,22 @@ export class Products extends React.Component<RouteComponentProps<{}>, ProductsE
                         <td>{new Date(prod.dateCreated).toLocaleDateString() }</td>
                         <td>{prod.name }</td>                      
                         <td>{prod.measurableValue}</td>
-                        <td><a href={'api/Product/GetSubstitutes?id=' +prod.id}>Get substitutes</a></td>
+                        <td><a href={'/substitutes?id=' +prod.id} onClick={() => { Products.getSubstitutes(prod.id) } }  >Get substitutes</a></td>
                                       
                    </tr>
             )}
             </tbody>
         </table>;
+    }    
 
-    }
-    private static renderSubstitutessTable() {
-        alert('test');
-    }
+    private static getSubstitutes(id: string) {
+        return fetch('api/Product/GetSubstitutes?id='+id)
+           // .then(response => response.json() as Promise<Product[]>)
+            
+           ;
+        //  return  alert('l');
+     }
+           
 }
 
 interface Product {

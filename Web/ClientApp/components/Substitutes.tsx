@@ -1,0 +1,79 @@
+import * as React from 'react';
+import { RouteComponentProps } from 'react-router';
+import 'isomorphic-fetch';
+
+interface ProductsExampleState {
+    products: RankedProduct[];
+    loading: boolean;
+    substitutes: boolean;
+}
+
+export class Substitutes extends React.Component<RouteComponentProps<{}>, ProductsExampleState> {
+    constructor() {
+        super();
+        this.state = { products: [], loading: true, substitutes: false };
+
+        var url = new URL(window.location.href);
+        var baseId = url.searchParams.get("id");
+
+        fetch('api/Product/GetSubstitutes?id=' +baseId)
+            .then(response => response.json() as Promise<RankedProduct[]>)
+            .then(data => {
+                this.setState({ products: data, loading: false });
+            });
+    }
+
+    public render() {
+
+            let contents = this.state.loading
+            ? <p><em>Loading...</em></p>
+            : Substitutes.renderSubstitutes(this.state.products);
+       
+        return <div>
+            <h1>Products list</h1>
+            <p>This component demonstrates list of substitute products fo chsen product.</p>
+            { contents }
+        </div>;
+    }
+
+    private static renderSubstitutes(products: RankedProduct[]) {
+        return <table className='table'>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Sugar value</th>                   
+                    <th>Taste</th> 
+                    <th>Consumtion convinience</th>
+                    <th>Price</th>
+                    <th>Total rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                    {products.map(prod =>
+                    <tr key={prod.id}>                       
+                        <td>{prod.name }</td>                      
+                        <td>{prod.measurableValue}</td>
+                        <td>{prod.rate1}</td>  
+                        <td>{prod.rate2}</td>  
+                        <td>{prod.rate3}</td>  
+                        <td>{prod.totalRate}</td>  
+                   </tr>
+            )}
+            </tbody>
+        </table>;
+    }  
+           
+}
+
+interface RankedProduct {
+    id: string;
+    name: string;
+    description: string;
+    measurableValue: number;
+    category: string;
+    baseProd: string;
+    rate1: number;
+    rate2: number;
+    rate3: number;
+    totalRate: number;
+}
