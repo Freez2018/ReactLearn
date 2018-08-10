@@ -36,7 +36,7 @@ export class Products extends React.Component<RouteComponentProps<{}>, ProductsE
         return <table className='table'>
             <thead>
                 <tr>
-                    <th>Date created</th>
+                    <th>Product view</th>
                     <th>Name</th>                   
                     <th>Measurable Value</th> 
                     <th>Get substitutes</th>    
@@ -45,7 +45,7 @@ export class Products extends React.Component<RouteComponentProps<{}>, ProductsE
             <tbody>
                     {products.map(prod =>
                     <tr key={prod.dateCreated}>
-                        <td>{new Date(prod.dateCreated).toLocaleDateString() }</td>
+                        <td><img src={'./Media/Images/ProductImages/'+prod.id+'.png'}/></td>
                         <td>{prod.name }</td>                      
                         <td>{prod.measurableValue}</td>
                         <td><a href={'/substitutes?id=' +prod.id} onClick={() => { Products.getSubstitutes(prod.id) } }  >Get substitutes</a></td>

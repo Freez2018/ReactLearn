@@ -60,6 +60,7 @@ export class Substitutes extends React.Component<RouteComponentProps<{}>, Produc
                     <th>Consumtion convinience</th>
                     <th>Price</th>
                     <th>Total rating</th>
+                    <th>Rate this</th>
                 </tr>
             </thead>
             <tbody>
@@ -70,7 +71,8 @@ export class Substitutes extends React.Component<RouteComponentProps<{}>, Produc
                         <td>{prod.rate1}</td>  
                         <td>{prod.rate2}</td>  
                         <td>{prod.rate3}</td>  
-                        <td>{prod.totalRate}</td>  
+                        <td>{prod.totalRate}</td> 
+                        <td><a href='#'>Rate this substitute</a></td>
                    </tr>
             )}
             </tbody>

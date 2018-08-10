@@ -81,7 +81,7 @@ namespace Data
                                      })
                          ;
 
-            return query;
+            return query.OrderByDescending(x=>x.totalRate);
         }
 
 
