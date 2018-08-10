@@ -45,6 +45,12 @@ namespace Web.Controllers
             // TODO change to add mapping
             return _ProductsManager.GetSubstitutes(id);
         }
+        [HttpGet("[action]")]
+        public Product GetProduct(string id)
+        {
+            // TODO change to add mapping
+            return _ProductsManager.GetProduct(id);
+        }
         // POST: Product/Create
         [HttpPost]
         [ValidateAntiForgeryToken]

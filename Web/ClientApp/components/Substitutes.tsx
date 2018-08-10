@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import 'isomorphic-fetch';
+import { Product } from './Products';
 
 interface ProductsExampleState {
     products: RankedProduct[];
+    baseproduct: Product;
     loading: boolean;
     substitutes: boolean;
 }
@@ -11,12 +13,24 @@ interface ProductsExampleState {
 export class Substitutes extends React.Component<RouteComponentProps<{}>, ProductsExampleState> {
     constructor() {
         super();
-        this.state = { products: [], loading: true, substitutes: false };
+        this.state = {
+            products: [], loading: true, substitutes: false, baseproduct:   {
+                                                                            dateCreated: "Hello",
+                                                                            description: "",
+                                                                            measurableValue: 1, name :"", id :""  
+                                                                             }        
+                    };
 
         var url = new URL(window.location.href);
         var baseId = url.searchParams.get("id");
 
-        fetch('api/Product/GetSubstitutes?id=' +baseId)
+        fetch('api/Product/GetProduct?id=' + baseId)
+            .then(response => response.json() as Promise<Product>)
+            .then(data => {
+                this.setState({ baseproduct: data, loading: false });
+            });
+
+        fetch('api/Product/GetSubstitutes?id=' + baseId)
             .then(response => response.json() as Promise<RankedProduct[]>)
             .then(data => {
                 this.setState({ products: data, loading: false });
@@ -31,7 +45,7 @@ export class Substitutes extends React.Component<RouteComponentProps<{}>, Produc
        
         return <div>
             <h1>Products list</h1>
-            <p>This component demonstrates list of substitute products fo chsen product.</p>
+            <p>This component demonstrates list of substitute products for product: {this.state.baseproduct.name} </p>
             { contents }
         </div>;
     }

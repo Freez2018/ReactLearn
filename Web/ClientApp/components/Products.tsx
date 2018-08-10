@@ -66,9 +66,9 @@ export class Products extends React.Component<RouteComponentProps<{}>, ProductsE
            
 }
 
-interface Product {
+export interface Product {
     dateCreated: string;
-    description: number;
+    description: string;
     measurableValue: number;
     name: string;
     id: string;
