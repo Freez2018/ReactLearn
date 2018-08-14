@@ -9,6 +9,7 @@ using Client.Service.Products.Models;
 using Data.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace Web.Controllers
 {
@@ -16,15 +17,18 @@ namespace Web.Controllers
     public class ProductController : Controller
     {
         private readonly IProductsManager _ProductsManager;
-        public ProductController(IServiceProvider context, IProductsManager productsManager)
+        public ProductController(IServiceProvider context, IProductsManager productsManager, IConfiguration configuration)
         {           
             _ProductsManager = productsManager;
+            Configuration = configuration;
         }
+        public IConfiguration Configuration { get; }
 
         // GET: Product
         public ActionResult Index(string sort)
         {
             var actives = _ProductsManager.ListActiveProducts(sort).ToList();
+
             return View();
         }
 
@@ -33,7 +37,11 @@ namespace Web.Controllers
         {
             return View();
         }
-
+        [HttpGet("[action]")]
+        public string GetPath()
+        {         
+            return Configuration["BasePath"].ToString();           
+        }
         [HttpGet("[action]")]
         public IEnumerable<Product> ProductsList()
         {           

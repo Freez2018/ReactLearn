@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { NavMenu } from './NavMenu';
 
+
 export interface LayoutProps {
     children?: React.ReactNode;
 }
