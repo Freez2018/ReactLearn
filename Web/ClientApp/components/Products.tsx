@@ -35,12 +35,12 @@ export class Products extends React.Component<RouteComponentProps<{}>, ProductsE
             <h1>Products list</h1>
             <p>This component demonstrates fetching data from the server.</p>
             {contents}
-            <img src={require("../../Media/Images/ProductImages/156eec10-e6aa-4f00-a716-4c1d0d504b6d.png")} />
+            
         </div>;
     }
 
     private static renderForecastsTable(products: Product[], path: string) {
-       
+               
         return <table className='table'>
             <thead>
                 <tr>
@@ -53,7 +53,7 @@ export class Products extends React.Component<RouteComponentProps<{}>, ProductsE
             <tbody>
                     {products.map(prod =>
                     <tr key={prod.dateCreated}>                      
-                        <td><img src={require("../../Media/Images/ProductImages/1.png")} /></td>   
+                        <td> <img src={require('../../Media/Images/ProductImages/' + prod.id +'.png')} alt= {prod.id} /></td>   
                         <td>{prod.name}</td>
                         <td>{prod.measurableValue}</td>
                         <td><a href={'/substitutes?id=' +prod.id} onClick={() => { Products.getSubstitutes(prod.id) } }  >Get substitutes</a></td>
